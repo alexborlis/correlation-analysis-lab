@@ -1,6 +1,11 @@
+import pandas as pd
+
 def compute_correlation_matrix(df):
-    print("[INFO] Вибір числових колонок для побудови кореляційної матриці")
-    numeric_df = df.select_dtypes(include='number')
-    print(f"[INFO] Обрано {numeric_df.shape[1]} числових колонок")
-    corr_matrix = numeric_df.corr()
+    print("[INFO] Обробка категоріальних змінних")
+    df_encoded = pd.get_dummies(df, drop_first=True)
+
+    print(f"[INFO] Перетворений датафрейм: {df_encoded.shape}")
+    corr_matrix = df_encoded.corr()
     return corr_matrix
+
+
